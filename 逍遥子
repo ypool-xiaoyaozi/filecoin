@@ -10,7 +10,6 @@ Filecoin network
 8.	filecoin文档：https://docs.filecoin.io/
 测试网第二阶段相关下载链接：
 	filecoin挖矿需要下载proof证明文件，才能顺利接入测试网：
-	https://filecoin.coinsummer.io/v26.html 由CoinSummer实验室提供
         https://proofs.filecoin.io/ 
 或者在运行lotus 守护程序之前运行以下环境变量：export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
 官方下载链接：可以使用迅雷下载。下载完成后放入/var/tmp/filecoin-proof
@@ -81,53 +80,31 @@ lotus常规命令使用
 4. 运行worker：lotus-seal-worker run --address=192.168.1.1:xxxx需要给 worker 指定一个四位数的端口
    注意：运行远端worker需要安装基础环境，以及需要证明文件可以使用scp命令局域网传输。
 相关环境变量
-# lotus 路径：
-LOTUS_PATH
-# 例如： export LOTUS_PATH=/xxx
-
-# miner 路径： 
-LOTUS_STORAGE_PATH
-# 例如： export LOTUS_STORAGE_PATH=/xxx
-
-# worker 路径： 
-WORKER_PATH
-# 例如： export WORKER_PATH=/xxx
-
-# proof 证明参数路径： 
+lotus 路径：LOTUS_PATH
+例如： export LOTUS_PATH=/xxx
+miner 路径： LOTUS_STORAGE_PATH
+例如： export LOTUS_STORAGE_PATH=/xxx
+worker 路径： WORKER_PATH
+例如： export WORKER_PATH=/xxx
+proof 证明参数路径： 
 FIL_PROOFS_PARAMETER_CACHE
-如： export FIL_PROOFS_PARAMETER_CACHE=/xxx/filecoin-proof-parameters
-
-# 临时文件夹路径： 
-TMPDIR
-# 例如： export TMPDIR=/xxx
-
-# 最大化内存参数
-FIL_PROOFS_MAXIMIZE_CACHING
-# 例如： export FIL_PROOFS_MAXIMIZE_CACHING=1
-
-# Rust 日志
-RUST_LOG
-# 例如： export RUST_LOG=Debug
-
-# GPU计算Precommit2
-FIL_PROOFS_USE_GPU_COLUMN_BUILDER
-# 例如： export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
-
-# 源码编译底层库
-FFI_BUILD_FROM_SOURCE
-# 例如： export FFI_BUILD_FROM_SOURCE=1
-# GOLANG 代理
-GOPROXY
-# 例如： export GOPROXY=https://goproxy.cn export GOPROXY=https://goproxy.io
-# 启动小扇区支持
+export FIL_PROOFS_PARAMETER_CACHE=/xxx/filecoin-proof-parameters
+临时文件夹路径： TMPDIR
+例如： export TMPDIR=/xxx
+最大化内存参数FIL_PROOFS_MAXIMIZE_CACHING
+例如： export FIL_PROOFS_MAXIMIZE_CACHING=1
+Rust 日志:RUST_LOG
+例如： export RUST_LOG=Debug
+GPU计算Precommit2:FIL_PROOFS_USE_GPU_COLUMN_BUILDER
+例如： export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
+源码编译底层库:FFI_BUILD_FROM_SOURCE
+例如： export FFI_BUILD_FROM_SOURCE=1
+GOLANG 代理 GOPROXY
+例如： export GOPROXY=https://goproxy.cn export GOPROXY=https://goproxy.io
+启动小扇区支持
 FIL_USE_SMALL_SECTORS
-# 例如： export FIL_USE_SMALL_SECTORS=true
-
-# 显卡相关
+例如： export FIL_USE_SMALL_SECTORS=true
 BELLMAN_CUSTOM_GPU
-# 例如： export BELLMAN_CUSTOM_GPU="GeForce RTX 2080 Ti:4352"
-
-# 下载证明参数代理：
-IPFS_GATEWAY
-# 例如：
+例如： export BELLMAN_CUSTOM_GPU="GeForce RTX 2080 Ti:4352"
+下载证明参数代理
 export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
