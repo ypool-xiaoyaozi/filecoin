@@ -1,0 +1,134 @@
+Filecoin network
+测试网第二阶段相关链接：
+1.	官方博客：https://filecoin.io/
+2.	源码仓库：https://github.com/filecoin-project
+3.	lotus开发文档：https://docs.lotu.sh/
+4.	go-filecoin开发文档：https://go.filecoin.io/go-filecoin-tutorial/Home.html
+5.	英文版白皮书：https://filecoin.io/filecoin.pdf
+6.	区块浏览器:https://stats.testnet.filecoin.io/
+7.	spces设计文档: https://filecoin-project.github.io/specs/
+8.	filecoin文档：https://docs.filecoin.io/
+测试网第二阶段相关下载链接：
+	filecoin挖矿需要下载proof证明文件，才能顺利接入测试网：
+	https://filecoin.coinsummer.io/v26.html 由CoinSummer实验室提供
+https://proofs.filecoin.io/ 
+或者在运行lotus 守护程序之前运行以下环境变量：export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
+官方下载链接：可以使用迅雷下载。下载完成后放入/var/tmp/filecoin-proof
+代理软件下载：github下载源码国内下载过慢
+	https://github.com/jiangxufeng/v2rayL
+经济模型：https://filecoin.io/blog/filecoin-cryptoeconomic-constructions/
+甘特图：https://app.instagantt.com/shared/s/1152992274307505/latest
+rust 和 rustup 的安装环境配置（Cargo）：
+	官方文档：https://www.rust-lang.org/tools/install
+社区文档：https://learnku.com/docs/rust-lang/2018/ch01-01-installation/4494
+Filecoin Discover：
+	官方中文博客https://filecoin.io/zh-cn/blog/intro-filecoin-discover/
+
+filecoin测试网挖矿环境配置
+我的机器配置仅供参考：amd3970x 1Tb nvme协议固态硬盘， 128g（ram） 英伟达2080Ti，LSI raid卡 机械硬盘组的raid0大家可以自行考虑
+系统环境：ubuntu18.04server
+nvidia显卡驱动安装教程：
+1.	sudo apt-get install ubuntu-drivers-common安装ubuntu-drivers组件
+2.	ubuntu-drivers devices 查看驱动版本
+3.	sudo ubuntu-drivers autoinstall安装系统推荐版本的驱动软件
+安装英伟达cuda工具包
+1.	wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+2.	sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+3.	wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+1.	sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+2.	sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+3.	sudo apt-get update
+4.	sudo apt-get -y install cuda
+安装完成重启电脑即可重启命令：sudo init 6
+filecoin 测试网运行环境
+1.	sudo apt update
+2.	sudo apt install mesa-opencl-icd ocl-icd-opencl-dev
+3.	sudo add-apt-repository ppa:longsleep/golang-backports
+4.	sudo apt update
+5.	sudo apt install golang-go gcc git bzr jq pkg-config mesa-opencl-icd ocl-icd-opencl-dev
+6.	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 安装rustc
+
+安装编译filecoin源代码
+1.	git clone https://github.com/filecoin-project/lotus.git
+2.	cd lotus
+3.	编译源代码之前可以挂一下代理可以用以下环境吧变量
+export GOPROXY=https://goproxy.io 或者 export GOPROXY=https://goproxy.cn
+4 amd机器编译可以使用：env RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make clean all
+	常规编译命令为：make clean && make all
+	最后：sudo make install
+lotus常规命令使用
+1.	lotus daemon 启动守护程序接入测试网络
+2.	lotus net peers 查看peers接入情况
+3.	lotus sync wait 查看区块同步状态
+4.	lotus wallet new bls创建钱包地址
+5.	https://t01000.miner.interopnet.kittyhawk.wtf/ 水龙头地址可能会发生改变，到水龙头领取测试币以及申请矿工ID
+6.	初始化矿工：lotus-storage-miner --storagerepo=/xxx init --actor=t0xxx --owner=t3xxxx -–storagerepo=/xxx是指定一个目录比如机械盘目录这个也可以通过环境变量去设置看每个人习惯
+1.	运行矿工：lotus-storage-miner --storagerepo=/xxx run
+2.	查看矿工状态：lotus-storage-miner --storagerepo=/xxx info
+3.	执行密封随机数扇区: lotus-storage-miner --storagerepo=/xxx sectors pledge
+一个扇区执行完了在执行一个随机数可以写一个脚本自动执行
+10. 查看爆块信息以及赎回奖励：lotus-storage-miner rewards redeem
+lotus-storage-miner rewards list（查看爆块信息）
+worker运行方法
+1.	启动worker ：lotus-seal-worker run --address=192.168.1.201:2333 --precommit1=false --precommit2=true --commit=true 可供参考、
+2.修改 miner ~/.lotusstorage/config.toml 里面的 ListenAddress:
+[API]
+ListenAddress = "/ip4/192.168.1.1/tcp/2345/http"
+RemoteListenAddress = "192.168.1.11:2345"
+仅供参考
+3．配置worker环境变量：export STORAGE_API_INFO=<TOKEN>:<API>	
+4. 运行worker：lotus-seal-worker run --address=192.168.1.1:xxxx需要给 worker 指定一个四位数的端口
+   注意：运行远端worker需要安装基础环境，以及需要证明文件可以使用scp命令局域网传输。
+相关环境变量
+# lotus 路径：
+LOTUS_PATH
+# 例如： export LOTUS_PATH=/xxx
+
+# miner 路径： 
+LOTUS_STORAGE_PATH
+# 例如： export LOTUS_STORAGE_PATH=/xxx
+
+# worker 路径： 
+WORKER_PATH
+# 例如： export WORKER_PATH=/xxx
+
+# proof 证明参数路径： 
+FIL_PROOFS_PARAMETER_CACHE
+如： export FIL_PROOFS_PARAMETER_CACHE=/home/user/nvme_disk/filecoin-proof-parameters
+
+# 临时文件夹路径： 
+TMPDIR
+# 例如： export TMPDIR=/xxx
+
+# 最大化内存参数
+FIL_PROOFS_MAXIMIZE_CACHING
+# 例如： export FIL_PROOFS_MAXIMIZE_CACHING=1
+
+# Rust 日志
+RUST_LOG
+# 例如： export RUST_LOG=Debug
+
+# GPU计算Precommit2
+FIL_PROOFS_USE_GPU_COLUMN_BUILDER
+# 例如： export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
+
+# 源码编译底层库
+FFI_BUILD_FROM_SOURCE
+# 例如： export FFI_BUILD_FROM_SOURCE=1
+
+# GOLANG 代理
+GOPROXY
+# 例如： export GOPROXY=https://goproxy.cn
+
+# 启动小扇区支持
+FIL_USE_SMALL_SECTORS
+# 例如： export FIL_USE_SMALL_SECTORS=true
+
+# 显卡相关
+BELLMAN_CUSTOM_GPU
+# 例如： export BELLMAN_CUSTOM_GPU="GeForce RTX 2080 Ti:4352"
+
+# 下载证明参数代理：
+IPFS_GATEWAY
+# 例如：
+export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
