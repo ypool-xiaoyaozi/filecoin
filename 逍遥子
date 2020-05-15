@@ -46,7 +46,6 @@ filecoin 测试网运行环境
 4.	sudo apt update
 5.	sudo apt install golang-go gcc git bzr jq pkg-config mesa-opencl-icd ocl-icd-opencl-dev
 6.	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 安装rustc
-
 安装编译filecoin源代码
 1.	git clone https://github.com/filecoin-project/lotus.git
 2.	cd lotus
@@ -60,7 +59,7 @@ lotus常规命令使用
 2.	lotus net peers 查看peers接入情况
 3.	lotus sync wait 查看区块同步状态
 4.	lotus wallet new bls创建钱包地址
-5.	https://t01000.miner.interopnet.kittyhawk.wtf/ 测试网水龙头：https://faucet.testnet.filecoin.io/
+5.	测试网水龙头：https://faucet.testnet.filecoin.io/
         水龙头地址可能会发生改变，到水龙头领取测试币以及申请矿工ID
 6.	初始化矿工：lotus-storage-miner --storagerepo=/xxx init --actor=t0xxx --owner=t3xxxx -–storagerepo=/xxx是指定一个目录比如机械盘目录这个也可以通过环境变量去设置看每个人习惯
 1.	运行矿工：lotus-storage-miner --storagerepo=/xxx run
