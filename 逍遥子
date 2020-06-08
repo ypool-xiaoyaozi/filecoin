@@ -12,7 +12,7 @@ Filecoin network
 	filecoin挖矿需要下载proof证明文件，才能顺利接入测试网：
         https://proofs.filecoin.io/ 
 或者在运行lotus 守护程序之前运行以下环境变量：export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
-官方下载链接：可以使用迅雷下载。下载完成后放入/var/tmp/filecoin-proof
+下载链接：可以使用迅雷下载。下载完成后放入/var/tmp/filecoin-proof-parameters
 代理软件下载：github下载源码国内下载过慢
 	https://github.com/jiangxufeng/v2rayL
 经济模型：https://filecoin.io/blog/filecoin-cryptoeconomic-constructions/
