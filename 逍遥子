@@ -73,9 +73,10 @@ lotus常规命令使用
 2.     修改 miner ~/.lotusstorage/config.toml 里面的 ListenAddress:
        [API]
         ListenAddress = "/ip4/192.168.1.1/tcp/2345/http"
-        RemoteListenAddress = "192.168.1.11:2345"
+        RemoteListenAddress = "127.0.0.1:2345"
 仅供参考
 3．配置worker环境变量：export STORAGE_API_INFO=<TOKEN>:<API>	
+export STORAGE_API_INFO=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.8FDWKupFqoouUZoFa6vaILIIB71SrZgqOSbexXYvxY0:/ip4/192.168.1.153/tcp/2345/http
 4. 运行worker：lotus-seal-worker run --address=192.168.1.1:xxxx需要给 worker 指定一个四位数的端口
    注意：运行远端worker需要安装基础环境，以及需要证明文件可以使用scp命令局域网传输。
 相关环境变量
