@@ -61,6 +61,7 @@ lotus常规命令使用
 4.	lotus wallet new bls创建钱包地址
 5.	测试网水龙头：https://faucet.testnet.filecoin.io/
         水龙头地址可能会发生改变，到水龙头领取测试币以及申请矿工ID
+	
 6.	初始化矿工：lotus-storage-miner --storagerepo=/xxx init --actor=t0xxx --owner=t3xxxx -–storagerepo=/xxx是指定一个目录比如机械盘目录这个也可以通过环境变量去设置看每个人习惯
 1.	运行矿工：lotus-storage-miner --storagerepo=/xxx run
 2.	查看矿工状态：lotus-storage-miner --storagerepo=/xxx info
