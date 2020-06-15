@@ -61,7 +61,8 @@ lotus常规命令使用
 4.	lotus wallet new bls创建钱包地址
 5.	测试网水龙头：https://faucet.testnet.filecoin.io/
         水龙头地址可能会发生改变，到水龙头领取测试币以及申请矿工ID
-	
+可能会在测试网重启初期会有人刷ID：可以在水龙头领取测试币到账后执行
+	lotus-storage-miner init create-worker-key-t3xxxxxxx 
 6.	初始化矿工：lotus-storage-miner --storagerepo=/xxx init --actor=t0xxx --owner=t3xxxx -–storagerepo=/xxx是指定一个目录比如机械盘目录这个也可以通过环境变量去设置看每个人习惯
 1.	运行矿工：lotus-storage-miner --storagerepo=/xxx run
 2.	查看矿工状态：lotus-storage-miner --storagerepo=/xxx info
@@ -69,6 +70,10 @@ lotus常规命令使用
         一个扇区执行完了在执行一个随机数可以写一个脚本自动执行
 10. 查看爆块信息以及赎回奖励：lotus-storage-miner rewards redeem
         lotus-storage-miner rewards list（查看爆块信息）
+运行远端daemon方法
+1.在~/.lotus 将config.toml 第一行改为
+ListenAddress = "/ip4/0.0.0.0/tcp/1234/http"然后重启lotus daemon 再把 ~/.lotus 目录下的 api token 传输到要运行的lotus-storage-miner
+的设备上将api改为运行了lotus daemon 的ip地址
         worker运行方法
 1.	启动worker ：lotus-seal-worker run --address=192.168.1.1:2333 --precommit1=false --precommit2=true --commit=true 可供参考、
 2.     修改 miner ~/.lotusstorage/config.toml 里面的 ListenAddress:
