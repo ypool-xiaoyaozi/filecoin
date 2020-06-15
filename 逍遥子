@@ -99,7 +99,7 @@ export FIL_PROOFS_PARAMETER_CACHE=/xxx/filecoin-proof-parameters
 最大化内存参数FIL_PROOFS_MAXIMIZE_CACHING
 例如： export FIL_PROOFS_MAXIMIZE_CACHING=1
 Rust 日志:RUST_LOG
-例如： export RUST_LOG=Debug
+例如： export RUST_LOG=info
 GPU计算Precommit2:FIL_PROOFS_USE_GPU_COLUMN_BUILDER
 例如： export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
 源码编译底层库:FFI_BUILD_FROM_SOURCE
