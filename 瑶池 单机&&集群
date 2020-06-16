@@ -10,7 +10,8 @@ Filecoin测试网单机&&集群相关文档
 >> sudo apt update
 >> sudo apt install golang-go gcc git bzr jq pkg-config mesa-opencl-icd ocl-icd-opencl-dev
 >> curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-	使用该脚本最后需要激活才能当前生效永久生效可将此环境变量写入 vi /etc/profile 文末添加: export PATH="$HOME/.cargo/bin:$PATH"重启设备之后永久生效
+	使用该脚本最后需要激活才能当前生效永久生效可将此环境变量写入 vi /etc/profile 文末添加: export PATH="$HOME/.cargo/bin:$PATH"重启设备
+	之后永久生效
 >> export PATH="$HOME/.cargo/bin:$PATH"
 >> sudo apt-get install ubuntu-drivers-common
 >> ubuntu-drivers devices
@@ -26,21 +27,25 @@ Filecoin测试网单机&&集群相关文档
 >> env RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make clean all
 >> sudo make install
 运行lotus节点
->> 重定向执行 nohup lotus daemon >lotus.log 2>&1 & 如果运行过lotus 无法同步请删除：rm -rf ~/.lotus 然后在重新执行 基本上可以解决同步区块问题 若不行可以向社区寻求对等peer 当前的测试网版本基本上已经不在需要使用这个了
+>> 重定向执行 nohup lotus daemon >lotus.log 2>&1 & 如果运行过lotus 无法同步请删除：rm -rf ~/.lotus 然后在重新执行 基本上可以解决同步区块问题
+若不行可以向社区寻求对等peer 当前的测试网版本基本上已经不在需要使用这个了
 >> lotus sync wait 查看当前区块同步高度
 >> lotus sync status 查看区块总高度以及自己的区块同步状态
 运行lotus-storage-miner
 >> lotus wallet new bls创建钱包地址水龙头领取测试币https://faucet.testnet.filecoin.io
 >> 如果没有提前下载证明文件可执行：export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
 如果在测试网上线初期有人非常恶心疯狂刷ID导致无法申请编号可以使用命令自动申请
->> lotus-storage-miner init create-worker-key-t3xxxx钱包地址先领取测试币 制定初始化目录可在 lotus-storage-miner 加上 -storagerepo=/data(目录) 打印输出info也要加上
+>> lotus-storage-miner init create-worker-key-t3xxxx钱包地址先领取测试币 制定初始化目录可在 lotus-storage-miner 加上 -storagerepo=/data
+(目录) 打印输出info也要加上
 执行run之前需要加上内存参数以及rust日志gpu计算p2注意在运行lotus daemon 之前不要加上会出现无法同步区块的情况
 >> export FIL_PROOFS_MAXIMIZE_CACHING=1 //使用参数需要做一个很大的swap空间
 >> export RUST_LOG=info
 >> export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 //使用参数需要正确安装驱动软件
 >> 重定向执行lotus-storage-miner run >miner.log 2>&1 & 也可以指定初始化时的目录 lotus-storage-miner --storagerepo=/data(目录) run
->> 执行随机数命令 lotus-storage-miner sectors pledge 也可以执行初始化时的目录 lotus-storage-miner -storagerepo=/data (目录) sectors pledge 需要完成seal过后继续执行该命令，内存多可以并行跑几个p1 (p2 c1 c2 不能并行)
->> 日志查看 tail -f lotus.log  tail -f miner.log 只要执行了rust日志打印的环境变量都会在日志文件显示如果日志过多可使用 grep 进行过滤一般关键词有 p1 "layer" p2 "tree"
+>> 执行随机数命令 lotus-storage-miner sectors pledge 也可以执行初始化时的目录 lotus-storage-miner -storagerepo=/data (目录) sectors pl
+edge 需要完成seal过后继续执行该命令，内存多可以并行跑几个p1 (p2 c1 c2 不能并行)
+>> 日志查看 tail -f lotus.log  tail -f miner.log 只要执行了rust日志打印的环境变量都会在日志文件显示如果日志过多可使用 grep 进行过滤一般关键词
+有 p1 "layer" p2 "tree"
 >> 在没有完成一个proving error报错提示那是由于没有算力提交导致的只要完成一个扇区的密封有算力提交之后这个报错不会再出现 其他报错可根据日志排查并解决。 
 
 
