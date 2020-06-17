@@ -21,6 +21,7 @@ Filecoin测试网单机&&集群相关文档
 >> git clone https://github.com/filecoin-project/lotus.git
 >> cd lotus
 >> env RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make clean all
+>> v27 env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1  FFI_BUILD_FROM_SOURCE=1 make clean all bench
 >> sudo make install
 升级lotus客户端当发现无法完成区块同步可以尝试升级代码
 >> git pull origin master
