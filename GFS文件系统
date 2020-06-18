@@ -1,1 +1,70 @@
-持续更新中
+GlusterFS是一个网络文件系统，能够处理数PB的数据和数千个用户。对于数据中心Linux服务器，GlusterFS可能是本地存储所需的文件系统。
+我们今天将演示如何使用GlusterFS设置三个代表单个命名空间的Ubuntu服务器。服务器系统为Ubuntu 18.04，这里假设您已经准备好了三个Ubuntu服务器。
+然后说，让我们开始运行GlusterFS。
+
+1.开始布局GFS
+假设我有以下地址有三台Ubuntu-18.04服务器：
+192.168.1.101
+192.168.1.102
+192.168.1.103
+
+2、映射地址
+使用命令sudo nano /etc /hosts 在每台服务器上打开hosts文件，然后添加以下内容（修改以适合您的IP地址方案）：
+192.168.1.101 gfs01 
+192.168.1.102 gfs02 
+192.168.1.103 gfs03
+保存后关闭文件。为了更清楚，请更改每个服务器的主机名以表示在hosts文件中映射的主机名。
+
+3、添加必要的存储库
+在每台服务器上，输入以下命令以添加必要的依赖项，存储库和密钥：
+sudo apt install software-properties-common -y 
+wget -O - https://download.gluster.org/pub/gluster/glusterfs/3.12/rsa.pub | apt-key add  - 
+sudo add-apt-repository ppa：gluster /glusterfs-3.12
+
+4、安装，启动和启用GlusterFS
+从gfs01和gfs02上的终端发出以下命令以安装GlusterFS：
+sudo apt install glusterfs-server -y
+现在我们可以使用以下命令启动和启用GlusterFS：
+sudo systemctl start glusterd 
+sudo systemctl enable glusterd
+
+5、配置GlusterFS
+首先要做的是创建一个可信任的池。这是在gfs01上使用以下命令完成的：
+sudo gluster peer probe gfs02
+你可以立即看到同步探测显示：成功。
+您可以使用以下命令检查peer状态：
+sudo gluster peer status
+
+6、创建分布式GlusterFS卷
+创建池后，我们必须创建分布式GlusterFS卷。我建议在不在系统目录中的分区上创建此卷，因为可能会发生同步错误。使用以下命令在gfs01和gfs02上创建新目录：
+sudo mkdir -p /glusterfs /distributed
+接下来我们可以创建卷。我们将使用命令（在gfs01上使用）创建一个名为v01的卷，其中包含副本gfs01和gfs02：
+sudo gluster volume create v01 replica 2 transport tcp gfs01：/ glusterfs / distributed gfs02：/ glusterfs / distributed
+您可以使用以下命令检查卷的状态：
+sudo gluster volume info v01
+您应该会看到卷已经启动
+
+7、GlusterFS客户端
+我们将使用gfs03作为我们的客户端。要安装必要的软件包，请输入以下命令：
+sudo apt install glusterfs-client -y
+安装完成后，使用以下命令创建安装点：
+sudo mkdir -p /mnt /glusterfs
+使用以下命令安装分布式glusterfs卷：
+sudo mount -t glusterfs gfs01：/ v01 / mnt / glusterfs /
+使用以下命令检查卷：
+df -h /mnt /glusterfs
+要在重新引导时进行此挂载，请将以下行添加到gfs03 / etc / fstab文件中：
+gfs01:/v01 /mnt/glusterfs glusterfs defaults,_netdev 0 0
+现在，如果必须重新启动服务器，GlusterFS卷将自动挂载。
+
+8、测试
+在gsf01上，发出命令：
+sudo mount -t glusterfs gfs01：/v01 /mnt
+在gsf02上，发出命令：
+sudo mount -t glusterfs gfs02：/v01 /mnt
+现在返回gfs03并使用以下命令创建测试文件：
+sudo touch / mnt / glusterfs / testing
+返回gfs01和gfs02并发出命令：
+ls / mnt
+您应该看到在gfs03上创建的空测试文件。
+至此，在已安装卷中创建的任何文件都将自动分发到节点。您可以在/mnt上的gfs01或gfs02 或/mnt /glusterfs的gfs03上创建文件，它们将自动同步。
