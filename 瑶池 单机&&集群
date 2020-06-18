@@ -45,6 +45,8 @@ ta(目录) 打印输出info也要加上
 >> 重定向执行lotus-storage-miner run >miner.log 2>&1 & 也可以指定初始化时的目录 lotus-storage-miner --storagerepo=/data(目录) run
 >> 执行随机数命令 lotus-storage-miner sectors pledge 也可以执行初始化时的目录 lotus-storage-miner -storagerepo=/data (目录) sectors p
 ledge 需要完成seal过后继续执行该命令，内存多可以并行跑几个p1 (p2 c1 c2 不能并行)
+>> 一键执行脚本 nohup env FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 RUST_LOG=info FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FIL_PROOFS_MAXI
+MIZE_CACHING=1 lotus-storage-miner  --storagerepo=/data run >miner.log 2>&1 &
 >> 日志查看 tail -f lotus.log  tail -f miner.log 只要执行了rust日志打印的环境变量都会在日志文件显示如果日志过多可使用 grep 进行过滤一般关键
 词有 p1 "layer" p2 "tree"
 >> 在没有完成一个proving error报错提示那是由于没有算力提交导致的只要完成一个扇区的密封有算力提交之后这个报错不会再出现 还有v26/v27第一个扇区密封
