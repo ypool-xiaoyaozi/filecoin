@@ -37,7 +37,7 @@ sudo gluster peer status
 创建池后，我们必须创建分布式GlusterFS卷。我建议在不在系统目录中的分区上创建此卷，因为可能会发生同步错误。使用以下命令在gfs01和gfs02上创建新目录：
 sudo mkdir -p /glusterfs /distributed
 接下来我们可以创建卷。我们将使用命令（在gfs01上使用）创建一个名为v01的卷，其中包含副本gfs01和gfs02：
-sudo gluster volume create v01 replica 2 transport tcp gfs01：/ glusterfs / distributed gfs02：/ glusterfs / distributed
+sudo gluster volume create v01 replica 2 transport tcp gfs01：/glusterfs / distributed gfs02：/ glusterfs / distributed
 您可以使用以下命令检查卷的状态：
 sudo gluster volume info v01
 您应该会看到卷已经启动
@@ -48,10 +48,10 @@ sudo apt install glusterfs-client -y
 安装完成后，使用以下命令创建安装点：
 sudo mkdir -p /mnt /glusterfs
 使用以下命令安装分布式glusterfs卷：
-sudo mount -t glusterfs gfs01：/ v01 / mnt / glusterfs /
+sudo mount -t glusterfs gfs01：/v01 /mnt /glusterfs /
 使用以下命令检查卷：
 df -h /mnt /glusterfs
-要在重新引导时进行此挂载，请将以下行添加到gfs03 / etc / fstab文件中：
+要在重新引导时进行此挂载，请将以下行添加到gfs03 /etc /fstab文件中：
 gfs01:/v01 /mnt/glusterfs glusterfs defaults,_netdev 0 0
 现在，如果必须重新启动服务器，GlusterFS卷将自动挂载。
 
