@@ -1,6 +1,4 @@
-GlusterFS是一个网络文件系统，能够处理数PB的数据和数千个用户。对于数据中心Linux服务器，GlusterFS可能是本地存储所需的文件系统。
-我们今天将演示如何使用GlusterFS设置三个代表单个命名空间的Ubuntu服务器。服务器系统为Ubuntu 18.04，这里假设您已经准备好了三个Ubuntu服务器。
-然后说，让我们开始运行GlusterFS。
+GlusterFS是一个网络文件系统，能够处理数PB的数据
 
 1.开始布局GFS
 假设我有以下地址有三台Ubuntu-18.04服务器：
