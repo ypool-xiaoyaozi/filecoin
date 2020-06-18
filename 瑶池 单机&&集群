@@ -49,7 +49,10 @@ ledge 需要完成seal过后继续执行该命令，内存多可以并行跑几�
 词有 p1 "layer" p2 "tree"
 >> 在没有完成一个proving error报错提示那是由于没有算力提交导致的只要完成一个扇区的密封有算力提交之后这个报错不会再出现 还有v26/v27第一个扇区密封
 过程中还有一个警告⚠️提醒也是正常的。其他报错可根据日志排查并解决。 
-
+>> 远端 lotus daemons使用方法 假设A机器运行了lotus daemon 将~/.lotus目录下的 ListenAddress = "/ip4/127.0.0.1/tcp/1234/http" 改为
+>> ListenAddress = "/ip4/0.0.0.0/tcp/1234/http" 然后重启lotus daemon 再把~/.lotus 目录下的 api token config.toml coppy到B机器下的
+>> ~/.lotus目录下将api 和config.toml的 0.0.0.0 改为 A 机器的IP地址不在同一局域网公网云节点也是类似的方法这个时候假设 B 机器也安装了同版本的
+>> lotus 客户端就可以用lotus sync wait 查看已经是完全同步状态就可以执行初始化以及运行挖矿客户端等相关操作。
 
 
 未完成持续更新中
