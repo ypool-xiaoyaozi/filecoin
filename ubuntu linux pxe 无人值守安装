@@ -1,1 +1,28 @@
-
+>> 安装环境：
+      ubuntu18.04.server
+      
+>> 安装及配置，首先需要安装 apache tftpserver kickstart 配置工具      
+      sudo apt-get install system-config-kickstart tftpd-hpa tftp-hpa apache2
+      
+>> 启动tftp和apache
+      sudo /etc/init.d/tftpd-hpa start
+      sudo /etc/init.d/apache2 start
+      
+>> wget下载镜像
+      http://releases.ubuntu.com/18.04/ubuntu-18.04.4-live-server-amd64.iso
+      
+>> 在网站目录建立一个文件夹，用于挂载镜像
+      sodu mkdir /var/www/html/ubuntu18.04
+      
+>> 挂载镜像文件到目录，并设置开机自动挂载
+      sudo mount -t iso9660 -r -o ro,loop ubuntu-18.04.4-live-server-amd64.iso /var/www/html/ubuntu18.04
+      sudo echo "ubuntu-18.04.4-live-server-amd64.iso /var/www/html/ubuntu18.04 iso9660 ro,loop,defaults 0 0" >> /etc/fstab
+      
+>> 创建ks目录
+      sudo mkdir /var/www/html/ks
+      
+>> 复制启动文件到tftpboot目录
+      sudo cp -arf /var/www/html/ubuntu18.04/install/mt86plus  /var/lib/tftpboot
+      
+>>       
+      
