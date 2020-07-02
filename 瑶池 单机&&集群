@@ -21,7 +21,8 @@ Filecoin测试网单机&&集群相关文档
 >> git clone https://github.com/filecoin-project/lotus.git
 >> cd lotus
 >> env RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make clean all
->> v27 env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1  FFI_BUILD_FROM_SOURCE=1 make clean all bench
+>> v27 env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1  FFI_BUILD_FROM_SOURCE=1 make clean all 
+       env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
 >> sudo make install
 升级lotus客户端当发现无法完成区块同步可以尝试升级代码
 >> git pull origin master
@@ -45,8 +46,7 @@ ta(目录) 打印输出info也要加上
 >> 重定向执行lotus-storage-miner run >miner.log 2>&1 & 也可以指定初始化时的目录 lotus-storage-miner --storagerepo=/data(目录) run
 >> 执行随机数命令 lotus-storage-miner sectors pledge 也可以执行初始化时的目录 lotus-storage-miner -storagerepo=/data (目录) sectors p
 ledge 需要完成seal过后继续执行该命令，内存多可以并行跑几个p1 (p2 c1 c2 不能并行)
->> 一键执行脚本 nohup env FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 RUST_LOG=info FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FIL_PROOFS_MAXI
-MIZE_CACHING=1 lotus-storage-miner  --storagerepo=/data run >miner.log 2>&1 &
+>> 一键执行脚本 nohup env FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 RUST_LOG=info FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FIL_PROOFS_MAXIMIZE_CACHING=1 lotus-storage-miner  --storagerepo=/data run >miner.log 2>&1 &
 >> 日志查看 tail -f lotus.log  tail -f miner.log 只要执行了rust日志打印的环境变量都会在日志文件显示如果日志过多可使用 grep 进行过滤一般关键
 词有 p1 "layer" p2 "tree"
 >> 在没有完成一个proving error报错提示那是由于没有算力提交导致的只要完成一个扇区的密封有算力提交之后这个报错不会再出现 v27版本不会有这个错误提示了
