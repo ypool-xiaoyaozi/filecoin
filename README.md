@@ -19,3 +19,13 @@ filecoin挖矿需要下载proof证明文件，才能顺利接入测试网：
 https://proofs.filecoin.io/
 或者使用环境变量：export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
 运行环境变量后运行此命令：./lotus fetch-params 32G
+
+经济模型：https://filecoin.io/blog/filecoin-cryptoeconomic-constructions/
+
+甘特图：https://app.instagantt.com/shared/s/1152992274307505/latest
+
+rust的安装环境配置（Cargo）： 官方文档：https://www.rust-lang.org/tools/install  社区文档：https://learnku.com/docs/rust-lang/2018/ch01-01-installation/4494
+
+Filecoin Discover： 官方中文博客https://filecoin.io/zh-cn/blog/intro-filecoin-discover/
+
+抽空更新 
