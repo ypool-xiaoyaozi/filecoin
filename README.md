@@ -28,4 +28,4 @@ rust的安装环境配置（Cargo）： 官方文档：https://www.rust-lang.org
 
 Filecoin Discover： 官方中文博客https://filecoin.io/zh-cn/blog/intro-filecoin-discover/
 
-抽空更新 
+汇总文档 抽空更新 
