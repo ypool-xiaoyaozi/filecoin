@@ -28,4 +28,6 @@ rust的安装环境配置（Cargo）： 官方文档：https://www.rust-lang.org
 
 Filecoin Discover： 官方中文博客https://filecoin.io/zh-cn/blog/intro-filecoin-discover/
 
+奖励网初始化命令lotus-miner init --actor=t04464 --owner=t3wpbw6ew4bgrufsndzboutey4xyy23qjjc4cgmbiworvssslgkjh7k645eqv3i42xdud333urtge2zcjj4dca
+如果竞赛网有智障还是疯狂的刷ID：./lotus-miner init --owner=t3.... --sector-size 32GiB
 汇总文档 抽空更新 
