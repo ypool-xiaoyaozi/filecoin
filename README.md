@@ -30,4 +30,23 @@ Filecoin Discover： 官方中文博客https://filecoin.io/zh-cn/blog/intro-file
 
 奖励网初始化命令lotus-miner init --actor=t04464 --owner=t3wpbw6ew4bgrufsndzboutey4xyy23qjjc4cgmbiworvssslgkjh7k645eqv3i42xdud333urtge2zcjj4dca
 如果竞赛网有智障还是疯狂的刷ID：./lotus-miner init --owner=t3.... --sector-size 32GiB
-汇总文档 抽空更新 
+
+简单叙述如何将自己的矿工暴露出去。接到存储订单
+相关查看命令：lotus-miner net listen lotus-miner net perrs
+开始步入正轨
+  vi .lotusminer/config.toml
+  修改地方为
+        ListenAddress = "/ip4/0.0.0.0/tcp/2345/http"
+        RemoteListenAddress = "0.0.0.0:2345"
+        ListenAddresses = ["/ip4/0.0.0.0/tcp/5472"]
+        AnnounceAddresses = ["/ip4/1.2.3.4/tcp/26164"]
+        修改后重启lotus-miner
+  lotus-miner id
+  lotus-miner actor set-addrs /ip4/1.2.3.4/tcp/26164/p2p/id
+  cat /lotus/build/bootstrap/bootstrappers.pi 查看之后可执行一下内容可修改
+  lotus-miner net connect /dns4/bootstrap-3.calibration.fildev.network/tcp/1347/p2p/12D3KooWJt4zgPL8B2cMoCLDQ6MPpMKH62ZjgvvPmrfDBLWpggKG（此内容可变动）
+  相关排查命令
+  lotus client query-ask t0xxx
+  lotus state miner-info t0XXX
+  lotus-miner storage-deals list
+  lotus client deal 
