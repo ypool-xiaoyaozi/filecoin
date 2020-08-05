@@ -51,7 +51,7 @@ Filecoin Discover： 官方中文博客https://filecoin.io/zh-cn/blog/intro-file
         
         修改后重启lotus-miner
         
-  lotus-miner netid
+  lotus-miner net  id
   
   lotus-miner actor set-addrs /ip4/1.2.3.4/tcp/26164/p2p/id
   
