@@ -47,8 +47,6 @@ Filecoin Discover： 官方中文博客https://filecoin.io/zh-cn/blog/intro-file
         
         ListenAddresses = ["/ip4/0.0.0.0/tcp/5472"]
         
-        AnnounceAddresses = ["/ip4/1.2.3.4/tcp/26164"]
-        
         修改后重启lotus-miner
         
   lotus-miner net  id
