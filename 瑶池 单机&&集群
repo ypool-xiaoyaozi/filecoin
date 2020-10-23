@@ -16,7 +16,6 @@ Filecoin测试网单机&&集群相关文档
 >> sudo apt-get install ubuntu-drivers-common
 >> ubuntu-drivers devices
 >> sudo ubuntu-drivers autoinstall
-	瑶池内部使用代理环境变量：export {http,https}_proxy="192.168.1.152:1081"
 克隆源代码
 >> git clone https://github.com/filecoin-project/lotus.git
 >> cd lotus
@@ -29,12 +28,14 @@ Filecoin测试网单机&&集群相关文档
 >> env RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make clean all
 >> sudo make install
 运行lotus节点
->> 重定向执行 nohup lotus daemon >lotus.log 2>&1 & 如果运行过lotus 无法同步请删除：rm -rf ~/.lotus 然后在重新执行 基本上可以解决同步区
+>> 执行 nohup lotus daemon >lotus.log 2>&1 & 如果运行过lotus 无法同步请删除：rm -rf ~/.lotus 然后在重新执行 基本上可以解决同步区
 块问题若不行可以向社区寻求对等peer 当前的测试网版本基本上已经不在需要使用这个了
 >> lotus sync wait 查看当前区块同步高度
 >> lotus sync status 查看区块总高度以及自己的区块同步状态
 运行lotus-storage-miner
->> lotus wallet new bls创建钱包地址水龙头领取测试币https://faucet.testnet.filecoin.io
+>> lotus wallet new bls创建矿工钱包地址 
+备份私钥 lotus wallet export f3钱包地址导出的私钥是可以导入imtoken的
+导入私钥 lotus wallet import 执行后输入备份的私钥
 >> 如果没有提前下载证明文件可执行：export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
 如果在测试网上线初期有人非常恶心疯狂刷ID导致无法申请编号可以使用命令自动申请
 >> lotus-storage-miner init create-worker-key-t3xxxx钱包地址先领取测试币 制定初始化目录可在 lotus-storage-miner 加上 -storagerepo=/da
