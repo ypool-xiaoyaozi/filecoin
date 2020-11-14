@@ -115,5 +115,7 @@ BELLMAN_CUSTOM_GPU
 例如： export BELLMAN_CUSTOM_GPU="GeForce RTX 2080 Ti:4352"
 下载证明参数代理
 export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/"
+优化版p1
+export FIL_PROOFS_USE_MULTICORE_SDR=1
 
 nohup env FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 RUST_LOG=info FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FIL_PROOFS_MAXIMIZE_CACHING=1 lotus-miner  --storagerepo=/data run >miner.log 2>&1 &
