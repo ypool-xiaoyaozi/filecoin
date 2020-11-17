@@ -54,7 +54,7 @@ filecoin 测试网运行环境
 export GOPROXY=https://goproxy.io 或者 export GOPROXY=https://goproxy.cn
 4 amd机器编译可以使用：env RUSTFLAGS="-C target-cpu=native -g" FFI_BUILD_FROM_SOURCE=1 make clean all需要rustc正常安装
 env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1  FFI_BUILD_FROM_SOURCE=1 make clean all 
-env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
+env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 FIL_PROOFS_MAXIMIZE_CACHING=1 make clean all
 常规编译命令为：make clean && make all
 	最后：sudo make install
 lotus常规命令使用
