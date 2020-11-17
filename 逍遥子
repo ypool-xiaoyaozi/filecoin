@@ -44,7 +44,8 @@ filecoin 测试网运行环境
 2.	sudo apt install mesa-opencl-icd ocl-icd-opencl-dev
 3.	sudo add-apt-repository ppa:longsleep/golang-backports
 4.	sudo apt update
-5.	sudo apt install golang-go gcc git bzr jq pkg-config mesa-opencl-icd ocl-icd-opencl-dev llvm clang
+5.	sudo apt install golang-go gcc git bzr jq pkg-config mesa-opencl-icd ocl-icd-opencl-dev llvm clang 
+        sudo apt install hwloc libhwloc-dev
 6.	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 安装rustc
 7.      sudo apt install hwloc libhwloc-dev llvm clang
 安装编译filecoin源代码
