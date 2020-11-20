@@ -120,4 +120,8 @@ export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs
 优化版p1
 export FIL_PROOFS_USE_MULTICORE_SDR=1
 
+make lotus-shed
+删除链上错误的扇区
+lotus-shed sectors terminate --really-do-it [sector]
+
 nohup env FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 RUST_LOG=info FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FIL_PROOFS_MAXIMIZE_CACHING=1 lotus-miner  --storagerepo=/data run >miner.log 2>&1 &
