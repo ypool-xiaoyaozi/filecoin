@@ -66,3 +66,7 @@ Filecoin Discover： 官方中文博客https://filecoin.io/zh-cn/blog/intro-file
   lotus-miner storage-deals list
   
   lotus client deal 
+
+
+此文已断更  
+        
